@@ -1,9 +1,13 @@
-// main is dummy file.
+// Copyright © 2016 budougumi0617 All rights reserved.
 
+// The Tasks creates Task List Comments from files.
 package main
 
-import "fmt"
+import "os"
+
+const Version string = "v0.0.1"
 
 func main() {
-    fmt.Println("Hello world")
+	cli := &CLI{outStream: os.Stdout, errStream: os.Stderr}
+	os.Exit(cli.Run(os.Args))
 }
