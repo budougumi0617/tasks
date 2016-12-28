@@ -1,5 +1,6 @@
 # tasks
 [![GoDoc](https://godoc.org/github.com/budougumi0617/tasks?status.svg)](https://godoc.org/github.com/budougumi0617/tasks)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.org/budougumi0617/tasks.svg?branch=master)](https://travis-ci.org/budougumi0617/tasks)
 [![codecov](https://codecov.io/gh/budougumi0617/tasks/branch/master/graph/badge.svg)](https://codecov.io/gh/budougumi0617/tasks)
 [![Code Climate](https://codeclimate.com/github/budougumi0617/tasks/badges/gpa.svg)](https://codeclimate.com/github/budougumi0617/tasks)

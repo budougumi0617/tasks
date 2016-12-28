@@ -2,11 +2,17 @@
 *.o
 *.a
 *.so
+*.swp
+coverage.txt
 
 # Folders
 _obj
 _test
 .vscode
+.idea
+dist
+bin
+
 
 # Architecture specific extensions/prefixes
 *.[568vq]
