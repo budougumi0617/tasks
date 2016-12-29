@@ -14,7 +14,7 @@ func TestFullversion(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Fullversion(); got != tt.want {
+			if got := fullversion(); got != tt.want {
 				t.Errorf("fullversion() = %v, want %v", got, tt.want)
 			}
 		})

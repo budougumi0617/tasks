@@ -38,9 +38,13 @@ ci-test:
 	echo "" > coverage.txt
 	for d in `glide novendor`; do \
 		go test -coverprofile=profile.out -covermode=atomic -v $$d; \
-		if [ -f profile.out ]; then \
-			cat profile.out >> coverage.txt; \
-			rm profile.out; \
+		if [ $$? != 0 ]; then \
+			exit -1; \
+		else \
+			if [ -f profile.out ]; then \
+				cat profile.out >> coverage.txt; \
+				rm profile.out; \
+			fi; \
 		fi; \
 	done
 
