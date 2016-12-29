@@ -12,6 +12,7 @@ _test
 .idea
 dist
 bin
+vendor
 
 
 # Architecture specific extensions/prefixes

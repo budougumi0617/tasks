@@ -6,6 +6,8 @@ import (
 	"flag"
 	"fmt"
 	"io"
+
+	"github.com/budougumi0617/tasks/version"
 )
 
 // CLI defines and outputs.
@@ -40,7 +42,7 @@ func (c *CLI) Run(args []string) int {
 		return ExitCodeParseFlagError
 	}
 	if vFlag {
-		fmt.Fprintf(c.outStream, "Tasks version is %s\n", Version)
+		fmt.Fprintf(c.outStream, "Tasks version is %s\n", version.Fullversion())
 		return ExitCodeOK
 	}
 
