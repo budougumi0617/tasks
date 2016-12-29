@@ -39,7 +39,7 @@ ci-test:
 	for d in `glide novendor`; do \
 		go test -coverprofile=profile.out -covermode=atomic -v $$d; \
 		if [ $$? != 0 ]; then \
-			exit -1; \
+			exit 2; \
 		else \
 			if [ -f profile.out ]; then \
 				cat profile.out >> coverage.txt; \
