@@ -45,7 +45,7 @@ TODO NG line.
 func TestCorrectParse(t *testing.T) {
 	var tests = []struct {
 		input    string
-		format   Language
+		lang     Language
 		key      []string
 		expected []string
 	}{
@@ -78,7 +78,7 @@ func TestCorrectParse(t *testing.T) {
 
 	for _, test := range tests {
 
-		got := parse(strings.NewReader(test.input), test.format, test.key)
+		got := parse(strings.NewReader(test.input), test.lang, test.key)
 
 		if !reflect.DeepEqual(got, test.expected) {
 			t.Errorf("Result = %q, Expected %q", got, test.expected)
