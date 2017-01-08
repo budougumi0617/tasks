@@ -1,5 +1,4 @@
 // Copyright © 2017 budougumi0617. All rights reserved.
-
 package main
 
 import (
@@ -9,7 +8,7 @@ import (
 )
 
 // parse collects task comments from io.Reader.
-func parse(r io.Reader, l Language, k []string) []*Task {
+func parse(s string, r io.Reader, l Language, k []string) []*Task {
 	tasks := []*Task{}
 
 	var lc int
@@ -18,7 +17,7 @@ func parse(r io.Reader, l Language, k []string) []*Task {
 		lc++
 		buf := strings.TrimSpace(lines.Text())
 		if isComment(buf, l) && hasKey(buf, k) {
-			tasks = append(tasks, &Task{Num: lc, Desc: buf})
+			tasks = append(tasks, &Task{FileName: s, Num: lc, Desc: buf})
 		}
 	}
 	return tasks
