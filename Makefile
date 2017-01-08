@@ -3,7 +3,7 @@ VERSION  := v0.0.1
 REVISION := $(shell git rev-parse --short HEAD)
 
 SRCS    := $(shell find . -type f -name '*.go')
-LDFLAGS := -ldflags="-s -w -X \"main.Version=$(VERSION)\" -X \"main.Revision=$(REVISION)\" -extldflags \"-static\""
+LDFLAGS := -ldflags="-s -w -X \"github.com/budougumi0617/tasks/version.Version=$(VERSION)\" -X \"github.com/budougumi0617/tasks/version.Revision=$(REVISION)\" -extldflags \"-static\""
 
 DIST_DIRS := find * -type d -exec
 
@@ -38,9 +38,13 @@ ci-test:
 	echo "" > coverage.txt
 	for d in `glide novendor`; do \
 		go test -coverprofile=profile.out -covermode=atomic -v $$d; \
-		if [ -f profile.out ]; then \
-			cat profile.out >> coverage.txt; \
-			rm profile.out; \
+		if [ $$? != 0 ]; then \
+			exit 2; \
+		else \
+			if [ -f profile.out ]; then \
+				cat profile.out >> coverage.txt; \
+				rm profile.out; \
+			fi; \
 		fi; \
 	done
 
