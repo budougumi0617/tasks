@@ -37,6 +37,9 @@ test:
 ci-test:
 	echo "" > coverage.txt
 	for d in `glide novendor`; do \
+		if [ `echo $$d | grep testdata` ]; then \
+			continue; \
+		fi; \
 		go test -coverprofile=profile.out -covermode=atomic -v $$d; \
 		if [ $$? != 0 ]; then \
 			exit 2; \

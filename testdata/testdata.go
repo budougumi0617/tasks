@@ -1,6 +1,6 @@
 // Copyright © 2016 budougumi0617. All rights reserved.
 
-package main
+package testdata
 
 import (
 	"fmt"
