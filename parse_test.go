@@ -56,10 +56,10 @@ func TestCorrectParse(t *testing.T) {
 				"TODO",
 			},
 			[]*Task{
-				&Task{FileName: "", Num: 0, Desc: "/// TODO OK line."},
-				&Task{FileName: "", Num: 1, Desc: "/// todo OK line."},
-				//&Task{FileName: "", Num: 0, Desc: "* TODO OK line."}, // TODO Actually, must be collect task from multiple lines.
-				&Task{FileName: "", Num: 7, Desc: "// TODO OK line."},
+				&Task{FileName: "", Num: 1, Desc: "/// TODO OK line."},
+				&Task{FileName: "", Num: 2, Desc: "/// todo OK line."},
+				//&Task{FileName: "", Num: 6, Desc: "* TODO OK line."}, // TODO Actually, must be collect task from multiple lines.
+				&Task{FileName: "", Num: 8, Desc: "// TODO OK line."},
 			},
 		},
 		{ // TODO tasks in .xaml file.
@@ -69,9 +69,9 @@ func TestCorrectParse(t *testing.T) {
 				"TODO",
 			},
 			[]*Task{
-				&Task{FileName: "", Num: 0, Desc: "<!-- TODO OK line. -->"},
-				&Task{FileName: "", Num: 1, Desc: "<!-- todo OK line. -->"},
-				//&Task{FileName: "", Num: 0, Desc: "TODO OK line."}, // TODO Actually, must be collect task from multiple lines.
+				&Task{FileName: "", Num: 1, Desc: "<!-- TODO OK line. -->"},
+				&Task{FileName: "", Num: 2, Desc: "<!-- todo OK line. -->"},
+				//&Task{FileName: "", Num: 6, Desc: "TODO OK line."}, // TODO Actually, must be collect task from multiple lines.
 			},
 		},
 	}
