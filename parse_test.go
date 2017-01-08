@@ -9,8 +9,7 @@ import (
 )
 
 const (
-	csWithTodo string = `
-/// TODO OK line.
+	csWithTodo string = `/// TODO OK line.
 /// todo OK line.
 todo = ngLine;
 /// TO DO NG line.
@@ -20,8 +19,7 @@ todo = ngLine;
 // TODO OK line.
     `
 
-	csWithHack string = `
-/// HACK OK line.
+	csWithHack string = `/// HACK OK line.
 /// hack OK line.
 hack = ngLing;
 /// HA CK NG line.
@@ -31,8 +29,7 @@ hack = ngLing;
 // HACK OK line.
     `
 
-	xamlWithTodo string = `
-<!-- TODO OK line. -->
+	xamlWithTodo string = `<!-- TODO OK line. -->
 <!-- todo OK line. -->
 <!-- TO DO NG line. -->
 <!--

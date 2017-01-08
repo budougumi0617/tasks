@@ -11,11 +11,11 @@ type Task struct {
 	// FileName is name of founded file.
 	FileName string
 	// Num is number of a task.
-	Num uint
+	Num int
 	// Desc is comments of a task.
 	Desc string
 }
 
 func (t *Task) String() string {
-	return "\nTask[FileName: \"" + t.FileName + "\", Num: " + strconv.FormatUint(uint64(t.Num), 10) + ", Desc: \"" + t.Desc + "\"]"
+	return "\nTask[FileName: \"" + t.FileName + "\", Num: " + strconv.Itoa(t.Num) + ", Desc: \"" + t.Desc + "\"]"
 }
