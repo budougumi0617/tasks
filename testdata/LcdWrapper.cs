@@ -44,17 +44,23 @@ namespace MonoBrickFirmwareWrapper.Display
         private static readonly Func<int> height = () => Lcd.Height;
         public static int Height { get { return height(); } }
 
+        // TODO task comment
         private static readonly Action<int, int, bool> setPixel = Lcd.SetPixel;
         public static Action<int, int, bool> SetPixel { get { return setPixel; } }
 
+        /* TODO task comment */
         private static readonly Func<int, int, bool> isPixelSet = Lcd.IsPixelSet;
         public static Func<int, int, bool> IsPixelSet { get { return isPixelSet; } }
 
+        // todo task comment
         private static readonly Action<int> update = Lcd.Update;
         public static Action<int> Update { get { return update; } }
 
+        // to do not task comment
         private static readonly Action saveScreen = Lcd.SaveScreen;
         public static Action SaveScreen { get { return saveScreen; } }
+
+        /// TODO task comment
 
         private static readonly Action loadScreen = Lcd.LoadScreen;
         public static Action LoadScreen { get { return loadScreen; } }

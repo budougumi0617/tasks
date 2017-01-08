@@ -1,0 +1,16 @@
+<!-- Copyright © 2017 budougumi0617. All rights reserved. -->
+
+<StackPanel>
+    <TextBlock Text="First Name:"/>
+    <TextBox Text="{Binding FirstName}"/>
+    <TextBlock Text="Last Name:"/>
+    <!-- todo task comment. -->
+    <TextBox Text="{Binding LastName}"/>
+    <!-- TO DO Not task comment. -->
+    <TextBlock Text="Age:"/>
+<!-- 
+TODO task comment. 
+-->
+    <TextBox Text="{Binding Age}"/>
+    <!-- TODO task comment. -->
+</StackPanel>
