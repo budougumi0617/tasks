@@ -9,8 +9,7 @@ import (
 )
 
 const (
-	csWithTodo string = `
-/// TODO OK line.
+	csWithTodo string = `/// TODO OK line.
 /// todo OK line.
 todo = ngLine;
 /// TO DO NG line.
@@ -20,8 +19,7 @@ todo = ngLine;
 // TODO OK line.
     `
 
-	csWithHack string = `
-/// HACK OK line.
+	csWithHack string = `/// HACK OK line.
 /// hack OK line.
 hack = ngLing;
 /// HA CK NG line.
@@ -31,8 +29,7 @@ hack = ngLing;
 // HACK OK line.
     `
 
-	xamlWithTodo string = `
-<!-- TODO OK line. -->
+	xamlWithTodo string = `<!-- TODO OK line. -->
 <!-- todo OK line. -->
 <!-- TO DO NG line. -->
 <!--
@@ -47,7 +44,7 @@ func TestCorrectParse(t *testing.T) {
 		input    string
 		lang     Language
 		key      []string
-		expected []string
+		expected []*Task
 	}{
 		{ // TODO tasks in .cs file.
 			csWithTodo,
@@ -55,11 +52,11 @@ func TestCorrectParse(t *testing.T) {
 			[]string{
 				"TODO",
 			},
-			[]string{
-				"/// TODO OK line.",
-				"/// todo OK line.",
-				// "* TODO OK line.", // TODO Actually, must be collect task from multiple lines.
-				"// TODO OK line.",
+			[]*Task{
+				&Task{FileName: "", Num: 1, Desc: "/// TODO OK line."},
+				&Task{FileName: "", Num: 2, Desc: "/// todo OK line."},
+				//&Task{FileName: "", Num: 6, Desc: "* TODO OK line."}, // TODO Actually, must be collect task from multiple lines.
+				&Task{FileName: "", Num: 8, Desc: "// TODO OK line."},
 			},
 		},
 		{ // TODO tasks in .xaml file.
@@ -68,10 +65,10 @@ func TestCorrectParse(t *testing.T) {
 			[]string{
 				"TODO",
 			},
-			[]string{
-				"<!-- TODO OK line. -->",
-				"<!-- todo OK line. -->",
-				// "TODO OK line.", // TODO Actually, must be collect task from multiple lines.
+			[]*Task{
+				&Task{FileName: "", Num: 1, Desc: "<!-- TODO OK line. -->"},
+				&Task{FileName: "", Num: 2, Desc: "<!-- todo OK line. -->"},
+				//&Task{FileName: "", Num: 6, Desc: "TODO OK line."}, // TODO Actually, must be collect task from multiple lines.
 			},
 		},
 	}
@@ -79,9 +76,8 @@ func TestCorrectParse(t *testing.T) {
 	for _, test := range tests {
 
 		got := parse(strings.NewReader(test.input), test.lang, test.key)
-
 		if !reflect.DeepEqual(got, test.expected) {
-			t.Errorf("Result = %q, Expected %q", got, test.expected)
+			t.Errorf("\nResult = %v\nExpected %v", got, test.expected)
 		}
 	}
 }

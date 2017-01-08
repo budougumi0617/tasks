@@ -12,11 +12,13 @@ import (
 func parse(r io.Reader, l Language, k []string) []*Task {
 	tasks := []*Task{}
 
+	var lc int
 	lines := bufio.NewScanner(r)
 	for lines.Scan() {
+		lc++
 		buf := strings.TrimSpace(lines.Text())
 		if isComment(buf, l) && hasKey(buf, k) {
-			tasks = append(tasks, &Task{Desc: buf})
+			tasks = append(tasks, &Task{Num: lc, Desc: buf})
 		}
 	}
 	return tasks
