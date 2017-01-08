@@ -8,17 +8,18 @@ import (
 	"strings"
 )
 
-func parse(r io.Reader, l Language, k []string) []string {
-	s := []string{}
+// parse collects task comments from io.Reader.
+func parse(r io.Reader, l Language, k []string) []*Task {
+	tasks := []*Task{}
 
 	lines := bufio.NewScanner(r)
 	for lines.Scan() {
 		buf := strings.TrimSpace(lines.Text())
 		if isComment(buf, l) && hasKey(buf, k) {
-			s = append(s, buf)
+			tasks = append(tasks, &Task{Desc: buf})
 		}
 	}
-	return s
+	return tasks
 }
 
 // Check a s is comment.
