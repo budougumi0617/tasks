@@ -11,7 +11,7 @@ import (
 
 // newSeek is instead of constructor.
 func newSeek(p []string) *seek {
-	if p == nil {
+	if p == nil || len(p) == 0 {
 		p = []string{"TODO", "FIXME", "UNDONE"}
 	}
 	return &seek{pattern: p, parse: parse}

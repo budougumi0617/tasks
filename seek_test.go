@@ -43,12 +43,15 @@ func TestWalkFunc(t *testing.T) {
 func Test_newSeek(t *testing.T) {
 	tests := []struct {
 		input []string
+		want  []string
 	}{
-		{[]string{"DUMMY", "DUMMY1"}},
+		{[]string{"DUMMY", "DUMMY1"}, []string{"DUMMY", "DUMMY1"}},
+		{nil, []string{"TODO", "FIXME", "UNDONE"}},
+		{[]string{}, []string{"TODO", "FIXME", "UNDONE"}},
 	}
 	for _, test := range tests {
 		got := newSeek(test.input)
-		want := &seek{pattern: test.input, parse: parse}
+		want := &seek{pattern: test.want, parse: parse}
 		if !reflect.DeepEqual(got.pattern, want.pattern) {
 			t.Errorf("\nResult = %v\nExpected %v", got, want)
 		}
@@ -56,22 +59,16 @@ func Test_newSeek(t *testing.T) {
 }
 
 func Test_getCode(t *testing.T) {
-	type args struct {
-		name string
-	}
 	tests := []struct {
 		name string
-		args args
 		want io.Reader
 	}{
-	// TODO: Add test cases.
+		{"NoExistFile", nil},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := getCode(tt.args.name); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("getCode() = %v, want %v", got, tt.want)
-			}
-		})
+	for _, test := range tests {
+		if got := getCode(test.name); !reflect.DeepEqual(got, test.want) {
+			t.Errorf("getCode() = %v, want %v", got, test.want)
+		}
 	}
 }
 
