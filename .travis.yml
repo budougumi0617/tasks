@@ -1,20 +1,27 @@
 language: go
 sudo: required
 go:
-    - 1.7
-    - tip
-
+- 1.7
+- tip
 before_install:
-    - sudo add-apt-repository ppa:masterminds/glide -y
-    - sudo apt-get update -q
-    - sudo apt-get install glide -y
-    - mkdir -p $GOPATH/bin
-
+- sudo add-apt-repository ppa:masterminds/glide -y
+- sudo apt-get update -q
+- sudo apt-get install glide -y
+- mkdir -p $GOPATH/bin
 install:
-    - make deps
-
+- make deps
 script:
-    - make ci-test
-
+- make ci-test
 after_success:
-    - bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash)
+
+deploy:
+  provider: releases
+  skip_cleanup: true  
+  api_key:
+    secure: rk8SWTFjGwwQ7zVrq4t/un/G3o/wfoevV8jLvKyHVqq0yuyvFVeQpWvogUFQnXSw/zy7qeumoC4KZGuaQB1lQJcboYbQBzS6WIt9q8lGkn+pGXk8l0mKg6Ix6eeKXKGh5Y1tNn/fJuChZ0OH8OEm+OlGwWEUq6K37xfYPKaUP30pMdtI4kRWDpUMIPbvNvRBn8KoXmaLXJ/iehP9yNDnvqNOqqMBJKc/4mDTqJNz3gjbJ3xCmV+tI66YpC0Ji4QEotknkteROPWGkEVRlEssWHB4mIwQEywBlvaSibHsi5gTujbjrlDCvjaGUBD4R3zpeiFKcJXkGI8pM2uJsegeVDQfikyouV65Y/iddKZSjfQmiUF3Llu8ebnznw65GTdNPrCOXJY9/rYaonevDjc2eYbi1t+pCZd0nbuSW/UfjVs/TovwIibWpFmeBmQnhyBflIe/QSSAZo5EvfM5vM2+vGL9B0Kup9dzx7DsCi65bVsteWvMQnLGBxtEE9OQ79J1NdIVlWmheA1IQXXCS5cX6z/NZ1kRdwtZtBnnZhZF2fLdCnk1xEgoxsNV6FwdGVp+ZmEM44Zo4FDEDop7GocINoxqKNE925svdcTbwnBRfiju0+sdobas0Ncv3nEExny7iQ0NkKbtLQPbcrMyeJ9zTJlJWpJ0o8qu1+qaWXGIPI8=
+  file: "$TRAVIS_BUILD_DIR/dist/*.{tar.gz,zip}"
+  on:
+    repo: budougumi0617/tasks
+    all_branches: true
+    condition: "$TRAVIS_TAG =~ ^v[0-9].*$"
