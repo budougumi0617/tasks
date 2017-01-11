@@ -28,6 +28,7 @@ install:
 clean:
 	rm -rf bin/*
 	rm -rf vendor/*
+	rm -rf dist/*
 
 .PHONY: test
 test:
@@ -60,7 +61,7 @@ cross-build: deps
 	done
 
 .PHONY: dist
-dist:
+dist: cross-build
 	cd dist && \
 	$(DIST_DIRS) cp ../LICENSE {} \; && \
 	$(DIST_DIRS) cp ../README.md {} \; && \
