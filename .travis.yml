@@ -14,18 +14,16 @@ script:
 - make ci-test
 after_success:
 - bash <(curl -s https://codecov.io/bash)
-
 before_deploy:
 - make dist
-
 deploy:
   provider: releases
-  skip_cleanup: true  
-  file_glob: true
+
   api_key:
-    secure: rk8SWTFjGwwQ7zVrq4t/un/G3o/wfoevV8jLvKyHVqq0yuyvFVeQpWvogUFQnXSw/zy7qeumoC4KZGuaQB1lQJcboYbQBzS6WIt9q8lGkn+pGXk8l0mKg6Ix6eeKXKGh5Y1tNn/fJuChZ0OH8OEm+OlGwWEUq6K37xfYPKaUP30pMdtI4kRWDpUMIPbvNvRBn8KoXmaLXJ/iehP9yNDnvqNOqqMBJKc/4mDTqJNz3gjbJ3xCmV+tI66YpC0Ji4QEotknkteROPWGkEVRlEssWHB4mIwQEywBlvaSibHsi5gTujbjrlDCvjaGUBD4R3zpeiFKcJXkGI8pM2uJsegeVDQfikyouV65Y/iddKZSjfQmiUF3Llu8ebnznw65GTdNPrCOXJY9/rYaonevDjc2eYbi1t+pCZd0nbuSW/UfjVs/TovwIibWpFmeBmQnhyBflIe/QSSAZo5EvfM5vM2+vGL9B0Kup9dzx7DsCi65bVsteWvMQnLGBxtEE9OQ79J1NdIVlWmheA1IQXXCS5cX6z/NZ1kRdwtZtBnnZhZF2fLdCnk1xEgoxsNV6FwdGVp+ZmEM44Zo4FDEDop7GocINoxqKNE925svdcTbwnBRfiju0+sdobas0Ncv3nEExny7iQ0NkKbtLQPbcrMyeJ9zTJlJWpJ0o8qu1+qaWXGIPI8=
+    secure: "omdcGUnAOr7wfP8gQcW+ewtKRrODn31U0MEcqdEwFBXY2bZUKPMywLyL2XWxNwyMpyq8FY+v9iRvoMVLanXkpI8V2LLr0FK/tPINqm00+D03JnQJKgS7WE3H0hHbX/I9vf1AWWSg9g7EOlMu7VhibuH1ixzKoktljzxpOXopAmNjag1j/HM/LB0cJlFZPZiahLs78G3SxvRtf/SxBKZ1UBl2/gPWqgUWB4MELmLEXLV/IOP08+IT/IlrycTC/fU6lTdHbxsgZhNQiSorvTL4mwNVB826G5m5lAKA1fRsXCI28z/ywLb9MMhmAU/R25ElF5lpDe1I1QoVaUGUUup7MEhnopzgcESe6GsOejz23R2plP/VsUKJmDitmGz6sjOYZ0Dw4hzp94vwcXv+mQmKCSEawC/7g9PgYfU/0n0aoX2b45OTMIezmxH/aj9SGDv3ekZmfjbwaqY60pMFs3xYaPwkAcmTb4VonkmoVNv8pIjhMUUKSKeZN2W8r/BYqbdKl0pCN1WoSsID5FHG7Ika+5guM9r+VH2luyBrsjqyP/6gitvmpKMeXMU141l0l8VttdX7rOfpBxoJ2fnLekiWOgqqCtviBCT3Gq7gwVm4f34ypluVMHPHx/c2cwDTLJps2QosqkdaSjjbZEMBG3jDLYvC9YZGK+Z3tK8whWjvajY="
+  file_glob: true
   file: "$TRAVIS_BUILD_DIR/dist/*.{tar.gz,zip}"
   on:
     repo: budougumi0617/tasks
-    all_branches: true
-    condition: "$TRAVIS_TAG =~ ^v[0-9].*$"
+    tags: true
+  skip_cleanup: true
