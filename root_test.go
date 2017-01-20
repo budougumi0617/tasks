@@ -1,3 +1,5 @@
+// Copyright © 2017 budougumi0617. All rights reserved.
+
 package main
 
 import (
