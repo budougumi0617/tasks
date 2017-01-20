@@ -1,4 +1,6 @@
-package version
+// Copyright © 2016 budougumi0617. All rights reserved.
+
+package main
 
 import "testing"
 

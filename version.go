@@ -1,7 +1,6 @@
 // Copyright © 2016 budougumi0617. All rights reserved.
 
-// Package version manages package information.
-package version
+package main
 
 // These values are overridden by Makefile.
 var (
