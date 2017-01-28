@@ -38,7 +38,9 @@ func TestRoot_Projects(t *testing.T) {
 				name: rootDir,
 			}
 
+			// Put file because we need to verify result does not be included not directory.
 			ioutil.TempFile(rootDir, "tempfile")
+
 			for _, subdir := range tt.want {
 				fpath := filepath.Join(rootDir, subdir)
 				os.Mkdir(fpath, 0644)
