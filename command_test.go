@@ -5,7 +5,6 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"io"
 	"testing"
 )
 
@@ -39,9 +38,6 @@ func TestCommand_Usage(t *testing.T) {
 		UsageLine   string
 		Short       string
 		Long        string
-		outStream   io.Writer
-		errStream   io.Writer
-		inStream    io.Reader
 		subCommands []*Command
 	}
 	tests := []struct {
@@ -57,9 +53,6 @@ func TestCommand_Usage(t *testing.T) {
 				UsageLine:   tt.fields.UsageLine,
 				Short:       tt.fields.Short,
 				Long:        tt.fields.Long,
-				outStream:   tt.fields.outStream,
-				errStream:   tt.fields.errStream,
-				inStream:    tt.fields.inStream,
 				subCommands: tt.fields.subCommands,
 			}
 			c.Usage()

@@ -24,12 +24,12 @@ const (
 
 // Commands lists the available commands and help topics.
 var commands = []*Command{
-// cmdRun,
-// cmdVersion,
+	cmdRun,
+	// cmdVersion,
 }
 
 func main() {
-	args := os.Args
+	args := os.Args[1:]
 	var (
 		vFlag bool
 		iFlag string
@@ -48,7 +48,6 @@ func main() {
 		fmt.Fprintf(stdout, "Tasks version is %s\n", Fullversion())
 		os.Exit(ExitCodeOK)
 	}
-
 	for _, cmd := range commands {
 		if cmd.Name() == args[0] && cmd.Runnable() {
 			cmd.Run(cmd, args[1:])
