@@ -40,16 +40,18 @@ func TestRoot_Projects(t *testing.T) {
 
 			// Put file because we need to verify result does not be included not directory.
 			ioutil.TempFile(rootDir, "tempfile")
+			var want []string
 
 			for _, subdir := range tt.want {
 				fpath := filepath.Join(rootDir, subdir)
 				os.Mkdir(fpath, 0644)
+				want = append(want, fpath)
 			}
 
 			// Act
-			if got := r.Projects(); !reflect.DeepEqual(got, tt.want) {
+			if got := r.Projects(); !reflect.DeepEqual(got, want) {
 				// Assert
-				t.Errorf("Root.Projects() = %v, want %v", got, tt.want)
+				t.Errorf("Root.Projects() = %v, want %v", got, want)
 			}
 		})
 	}
