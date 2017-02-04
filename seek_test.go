@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	testdata = "./testdata"
+	testdatadir = "./testdata"
 )
 
 func TestWalkFunc(t *testing.T) {
@@ -19,7 +19,7 @@ func TestWalkFunc(t *testing.T) {
 		expected []*Task
 	}{
 		{
-			testdata,
+			testdatadir,
 			[]*Task{
 				&Task{FileName: "LcdWrapper.cs"},
 				&Task{FileName: "TestData.xaml"},
@@ -81,7 +81,10 @@ func Test_getType(t *testing.T) {
 		args args
 		want Language
 	}{
-	// TODO: Add test cases.
+		{"Symple cs file", args{"symple.cs"}, csharp},
+		{"Symple xml file", args{"symple.xml"}, xaml},
+		{"Config file", args{".vimrc"}, config},
+		{"Not include dor in file", args{"COMMIT_EDITMSG"}, invalid},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

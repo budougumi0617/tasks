@@ -3,7 +3,8 @@
 package main
 
 import (
-	"io"
+	"bytes"
+	"fmt"
 	"testing"
 )
 
@@ -37,9 +38,6 @@ func TestCommand_Usage(t *testing.T) {
 		UsageLine   string
 		Short       string
 		Long        string
-		outStream   io.Writer
-		errStream   io.Writer
-		inStream    io.Reader
 		subCommands []*Command
 	}
 	tests := []struct {
@@ -55,9 +53,6 @@ func TestCommand_Usage(t *testing.T) {
 				UsageLine:   tt.fields.UsageLine,
 				Short:       tt.fields.Short,
 				Long:        tt.fields.Long,
-				outStream:   tt.fields.outStream,
-				errStream:   tt.fields.errStream,
-				inStream:    tt.fields.inStream,
 				subCommands: tt.fields.subCommands,
 			}
 			c.Usage()
@@ -86,6 +81,37 @@ func TestCommand_Runnable(t *testing.T) {
 			}
 			if got := c.Runnable(); got != tt.want {
 				t.Errorf("Command.Runnable() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestCLI_Run(t *testing.T) {
+	type fields struct {
+		Run func(cmd *Command, args []string)
+	}
+	expect := "Expected."
+	tests := []struct {
+		name   string
+		fields fields
+		args   []string
+		want   string
+	}{
+		{"Simple test",
+			fields{func(c *Command, a []string) {
+				fmt.Fprintf(stdout, "%s", a[0])
+			}}, []string{expect}, expect},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := &Command{
+				Run: tt.fields.Run,
+			}
+			stdout = new(bytes.Buffer) // captured output
+			c.Run(c, tt.args)
+			got := stdout.(*bytes.Buffer).String()
+			if got != tt.want {
+				t.Errorf("Run() prints\n\"%v\"\nBut, want\n\"%v\"", stdout, tt.want)
 			}
 		})
 	}

@@ -7,11 +7,15 @@ type Language int
 
 // List of Support languages.
 const (
-	csharp Language = iota + 1
+	invalid Language = iota
+	csharp
 	xaml
+	config
 )
 
 var commentformat = map[Language][]string{
-	csharp: []string{"///", "//", "/*"},
-	xaml:   []string{"<!--"},
+	invalid: []string{},
+	csharp:  []string{"///", "//", "/*"},
+	xaml:    []string{"<!--"},
+	config:  []string{},
 }

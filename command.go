@@ -4,7 +4,6 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"os"
 	"strings"
 )
@@ -25,12 +24,6 @@ type Command struct {
 	// Long is the long message shown in the 'go help <this-command>' output.
 	Long string
 
-	// Output streams.
-	outStream, errStream io.Writer
-
-	// Input steam.
-	inStream io.Reader
-
 	// subCommands lists the available commands and help topics.
 	// The order here is the order in which they are printed by 'go help'.
 	subCommands []*Command
@@ -48,8 +41,8 @@ func (c *Command) Name() string {
 
 // Usage shows how to use a command.
 func (c *Command) Usage() {
-	fmt.Fprintf(c.errStream, "usage: %s\n\n", c.UsageLine)
-	fmt.Fprintf(c.errStream, "%s\n", strings.TrimSpace(c.Long))
+	fmt.Fprintf(stderr, "usage: %s\n\n", c.UsageLine)
+	fmt.Fprintf(stderr, "%s\n", strings.TrimSpace(c.Long))
 	os.Exit(2)
 }
 

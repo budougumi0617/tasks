@@ -7,6 +7,7 @@ import (
 	"io"
 	"os"
 	"path"
+	"path/filepath"
 )
 
 // newSeek is instead of constructor.
@@ -15,6 +16,12 @@ func newSeek(p []string) *seek {
 		p = []string{"TODO", "FIXME", "UNDONE"}
 	}
 	return &seek{pattern: p, parse: parse}
+}
+
+// Walk collects task from rootPath.
+func (s *seek) Walk(rootPath string) {
+	fmt.Println("Walk in " + rootPath)
+	filepath.Walk(rootPath, s.walkFunc)
 }
 
 func getCode(name string) io.Reader {
@@ -26,7 +33,15 @@ func getCode(name string) io.Reader {
 }
 
 func getType(name string) Language {
+	if name[0] == '.' { // config file like a .vimrc etc...
+		return config
+	}
 	ext := path.Ext(name)
+
+	if len(ext) == 0 {
+		return invalid
+	}
+
 	var l Language
 	switch ext[1:] { // Return value of path.Ext includes "dot".
 	case "cs":
@@ -34,7 +49,7 @@ func getType(name string) Language {
 	case "xaml", "xml":
 		l = xaml
 	default:
-		l = 0
+		l = invalid
 	}
 	return l
 }
