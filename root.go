@@ -2,7 +2,10 @@
 
 package main
 
-import "io/ioutil"
+import (
+	"io/ioutil"
+	"path/filepath"
+)
 
 // Root has Tasks are exists in subdirectories.
 type Root struct {
@@ -17,8 +20,9 @@ func (r *Root) Projects() []string {
 		return p
 	}
 	for _, f := range files {
-		if f.IsDir() {
-			p = append(p, f.Name())
+		if n := f.Name(); n[0] != '.' && f.IsDir() {
+			path := filepath.Join(r.name, f.Name())
+			p = append(p, path)
 		}
 	}
 	return p
